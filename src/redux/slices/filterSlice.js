@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   categoryId: 0,
-  sort: {
+  sortType: {
     name: 'популярности',
     sort: 'raiting',
     order: 'desc',
-  }
+  } 
 }
 
 export const filterSlice = createSlice({
@@ -15,11 +15,16 @@ export const filterSlice = createSlice({
   reducers: {
     setCategoryId(state, action) {
         state.categoryId = action.payload
-    }
+    },
+    setSort(state, action) {
+      state.sortType = action.payload
+  },
+  
+
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setCategoryId } = filterSlice.actions
+export const { setCategoryId, setSort } = filterSlice.actions
 
 export default filterSlice.reducer

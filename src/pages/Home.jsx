@@ -10,23 +10,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
 
 export const Home = () => {
-
-  const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filterSlice.categoryId);
+  const dispatch = useDispatch();//
+  const categoryId = useSelector((state) => state.filter.categoryId);//
+  const sortType = useSelector((state) => state.filter.sortType)
 
   const {searchValue} = React.useContext(SearchContext)
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
+  //Использовались для реализации через состояния компонентов
   //const [categoryId, setcategoryId] = React.useState(0);
-  const [sortType, setsortType] = React.useState({
-    name: 'популярности',
-    sort: 'raiting',
-    order: 'desc',
-  });
+  // const [sortType, setsortType] = React.useState({
+  //   name: 'популярности',
+  //   sort: 'raiting',
+  //   order: 'desc',
+  // });
+
+  //Так раньше надо было создавать экшн с указанием типа и пэйлоад.
+  // const setCategoryIdObject = (id) => {
+  //   return { type: 'filter/setCategoryId', payload: id };
+  // }
+
   const onClickCategory = (id) => {
-    console.log('id category', id)
-    dispatch(setCategoryId(id))
+    dispatch(setCategoryId(id)) //с помощью хука usedispath передаем(оповещаем) номер категории в редакс
+    //в action  setCategory будет хранится type(filter/setCategoryId) и payload - id - делает это логика тулкит
   }
 
   React.useEffect(() => {
@@ -44,7 +51,7 @@ export const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType,searchValue,currentPage]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
   const pizzasList = items
     .filter(item => {
@@ -60,7 +67,7 @@ export const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={onClickCategory} />
-        <Sort sortObj={sortType} onChangeSort={(obj) => setsortType(obj)} />
+        <Sort/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
