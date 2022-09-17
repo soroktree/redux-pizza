@@ -1,4 +1,4 @@
-Pizza - SPA учебное приложение на React/Redux Toolkit
+Pizza - SPA приложение на React/Redux Toolkit
 
 Приложение предоставляет функционал пиццерии.
 Spa включает в себя:
